@@ -14,17 +14,17 @@ interface AdapterContainer {
     +DataSource getTargetDataSource(String serverLists)
 }
 
-class GenericContainer {
+class GenericContainer
+
+abstract DockerITContainer {
     +void postStart()
 }
 
-abstract DockerITContainer
-
 abstract DockerStorageContainer {
     +void configure()
-    +void setCommands
-    +void addEnvs
-    +void mapResources
+    +void setCommands()
+    +void addEnvs()
+    +void mapResources()
     +void postStart()
 }
 
