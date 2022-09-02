@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Startable {
+    void start()
+    void stop()
+}
+
+interface ITContainer {
+    String getAbbreviation()
+}
+
+interface AdapterContainer {
+    DataSource getTargetDataSource(String serverLists)
+}
+
+class GenericContainer {
+    protected void postStart()
+}
+
+abstract DockerITContainer
+
+
+ 
+
+Startable <|-- ITContainer
+ITContainer <|-- AdapterContainer
+
+
+@enduml
