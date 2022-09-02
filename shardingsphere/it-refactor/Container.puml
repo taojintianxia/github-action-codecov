@@ -2,29 +2,62 @@
 'https://plantuml.com/class-diagram
 
 interface Startable {
-    void start()
-    void stop()
+    +void start()
+    +void stop()
 }
 
 interface ITContainer {
-    String getAbbreviation()
+    +String getAbbreviation()
 }
 
 interface AdapterContainer {
-    DataSource getTargetDataSource(String serverLists)
+    +DataSource getTargetDataSource(String serverLists)
 }
 
 class GenericContainer {
-    protected void postStart()
+    +void postStart()
 }
 
 abstract DockerITContainer
 
+abstract DockerStorageContainer {
+    +void configure()
+    +void setCommands
+    +void addEnvs
+    +void mapResources
+    +void postStart()
+}
 
- 
+class MySQLContainer {
+    StorageContainerConfiguration storageContainerConfiguration
+    +void configure()
+    +int getPort()
+    +Optional<String> getDefaultDatabaseName()
+}
+
+class PostgreSQLContainer {
+    StorageContainerConfiguration storageContainerConfiguration
+    +void configure()
+    +int getPort()
+    +Optional<String> getDefaultDatabaseName()
+}
+
+class OpenGaussContainer {
+    StorageContainerConfiguration storageContainerConfiguration
+    +void configure()
+    +int getPort()
+    +Optional<String> getDefaultDatabaseName()
+}
 
 Startable <|-- ITContainer
 ITContainer <|-- AdapterContainer
+GenericContainer <|-- DockerITContainer
+ITContainer <|.. DockerITContainer
 
+DockerITContainer <|-- DockerStorageContainer
+
+DockerStorageContainer <|-- MySQLContainer
+DockerStorageContainer <|-- PostgreSQLContainer
+DockerStorageContainer <|-- OpenGaussContainer
 
 @enduml
