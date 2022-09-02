@@ -21,6 +21,8 @@ abstract DockerITContainer {
 }
 
 abstract DockerStorageContainer {
+    Map<String, DataSource> actualDataSourceMap
+    Map<String, DataSource> expectedDataSourceMap
     +void configure()
     +void setCommands()
     +void addEnvs()
