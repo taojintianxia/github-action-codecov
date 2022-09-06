@@ -14,6 +14,18 @@ interface AdapterContainer {
     +DataSource getTargetDataSource(String serverLists)
 }
 
+class ShardingSphereJdbcContainer {
+    +DataSource getTargetDataSource(final String serverLists)
+}
+
+class ShardingSphereProxyStandaloneContainer {
+    +DataSource getTargetDataSource(final String serverLists)
+}
+
+class ShardingSphereProxyClusterContainer {
+    +DataSource getTargetDataSource(final String serverLists)
+}
+
 class GenericContainer
 
 abstract DockerITContainer {
@@ -61,5 +73,11 @@ DockerITContainer <|-- DockerStorageContainer
 DockerStorageContainer <|-- MySQLContainer
 DockerStorageContainer <|-- PostgreSQLContainer
 DockerStorageContainer <|-- OpenGaussContainer
+
+EmbeddedITContainer <|-- ShardingSphereJdbcContainer
+AdapterContainer <|-- ShardingSphereJdbcContainer
+AdapterContainer <|-- ShardingSphereProxyStandaloneContainer
+AdapterContainer <|-- ShardingSphereProxyClusterContainer
+
 
 @enduml
